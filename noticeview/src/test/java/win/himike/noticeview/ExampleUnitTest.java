@@ -1,4 +1,4 @@
-package cn.mike.me.noticeview;
+package win.himike.noticeview;
 
 import org.junit.Test;
 

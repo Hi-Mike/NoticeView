@@ -1,4 +1,4 @@
-package cn.mike.me.noticeview;
+package win.himike.noticeview;
 
 /**
  * Created by ske on 2016/11/9.

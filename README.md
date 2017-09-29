@@ -3,6 +3,14 @@
 
 ![](https://raw.githubusercontent.com/Hi-Mike/NoticeView/master/notice.gif)
 
+# 使用
+
+通过Adapter定义显示的View
+
+```
+public class NormalAdapter implements NoticeView.Adapter<NormalItem>
+```
+
 感谢：
 
 [noticeview](https://github.com/czy1121/noticeview)

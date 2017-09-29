@@ -4,7 +4,7 @@ android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
     defaultConfig {
-        applicationId "cn.mike.me.noticeview"
+        applicationId "win.himike.noticeview"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk
         versionCode 1

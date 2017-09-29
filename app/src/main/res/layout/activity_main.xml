@@ -9,19 +9,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cn.mike.me.noticeview.MainActivity">
+    tools:context="win.himike.noticeview.MainActivity">
 
-    <cn.mike.noticeview.NoticeNormalView
+    <win.himike.noticeview.NoticeView
         android:id="@+id/notice_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_round"
-        android:paddingBottom="3dp"
+        android:paddingBottom="5dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="3dp" />
+        android:paddingTop="5dp" />
 
-    <cn.mike.noticeview.NoticeNormalView
+    <win.himike.noticeview.NoticeView
         android:id="@+id/notice_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:background="@drawable/bg_retangle" />
 
-    <cn.mike.noticeview.NoticeNormalView
+    <win.himike.noticeview.NoticeView
         android:id="@+id/notice_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

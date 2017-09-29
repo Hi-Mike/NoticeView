@@ -1,4 +1,4 @@
-package cn.mike.me.noticeview.adapter;
+package win.himike.noticeview.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,15 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import cn.mike.me.noticeview.NormalItem;
-import cn.mike.me.noticeview.R;
-import cn.mike.noticeview.NoticeNormalView;
+import win.himike.noticeview.NormalItem;
+import win.himike.noticeview.NoticeView;
+import win.himike.noticeview.R;
 
 /**
  * Created by ske on 2016/11/9.
  */
 
-public class NormalAdapter implements NoticeNormalView.Adapter<NormalItem> {
+public class NormalAdapter implements NoticeView.Adapter<NormalItem> {
     List<NormalItem> datas;
 
     public NormalAdapter(List<NormalItem> datas) {

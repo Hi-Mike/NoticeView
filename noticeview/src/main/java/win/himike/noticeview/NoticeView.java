@@ -1,4 +1,4 @@
-package cn.mike.noticeview;
+package win.himike.noticeview;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,7 +22,7 @@ import android.widget.ViewSwitcher;
  * Created by ske on 2016/11/9.
  */
 
-public class NoticeNormalView extends ViewSwitcher {
+public class NoticeView extends ViewSwitcher {
 
     private Animation mInUp = anim(1.5f, 0);
     private Animation mOutUp = anim(0, -1.5f);
@@ -42,13 +41,17 @@ public class NoticeNormalView extends ViewSwitcher {
     //    private boolean mIsResumed = true;
     private boolean mIsRunning = false;
     private boolean mUserPresent = true;
-    private final NoticeNormalView.DefaultViewFactory mDefaultFactory = new NoticeNormalView.DefaultViewFactory();
+    private final NoticeView.DefaultViewFactory mDefaultFactory = new NoticeView.DefaultViewFactory();
 
-    public NoticeNormalView(Context context) {
+    private final int FLIP_MSG = 1;
+    private Handler mHandler = null;
+    Adapter mAdapter;
+
+    public NoticeView(Context context) {
         this(context, null);
     }
 
-    public NoticeNormalView(Context context, AttributeSet attrs) {
+    public NoticeView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initWithContext(context, attrs);
         setInAnimation(mInUp);
@@ -136,6 +139,18 @@ public class NoticeNormalView extends ViewSwitcher {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        mHandler = new Handler(getHandler().getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == FLIP_MSG) {
+                    if (mIsRunning) {
+                        show(mIndex + 1);
+                        msg = obtainMessage(FLIP_MSG);
+                        sendMessageDelayed(msg, mInterval);
+                    }
+                }
+            }
+        };
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_USER_PRESENT);
@@ -149,6 +164,7 @@ public class NoticeNormalView extends ViewSwitcher {
         mIsVisible = false;
         getContext().unregisterReceiver(mReceiver);
         update();
+        mHandler = null;
     }
 
     @Override
@@ -188,7 +204,6 @@ public class NoticeNormalView extends ViewSwitcher {
             }
             mIsRunning = running;
         }
-        Log.e("ezy", "update() visible=" + mIsVisible + " resumed:" + " present:" + mUserPresent + ", started=" + mIsStarted + ", running=" + mIsRunning);
     }
 
     private void show(int index) {
@@ -209,11 +224,9 @@ public class NoticeNormalView extends ViewSwitcher {
 
         @Override
         public View makeView() {
-            return mAdapter.getView(NoticeNormalView.this);
+            return mAdapter.getView(NoticeView.this);
         }
     }
-
-    Adapter mAdapter;
 
     public void setAdapter(Adapter adapter) {
         removeAllViews();
@@ -231,19 +244,4 @@ public class NoticeNormalView extends ViewSwitcher {
 
         void bindView(int position, View nextView);
     }
-
-    private final int FLIP_MSG = 1;
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == FLIP_MSG) {
-                if (mIsRunning) {
-                    show(mIndex + 1);
-                    msg = obtainMessage(FLIP_MSG);
-                    sendMessageDelayed(msg, mInterval);
-                }
-            }
-        }
-    };
 }
